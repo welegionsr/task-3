@@ -28,23 +28,11 @@ class App extends React.Component<IAppProps, IAppState> {
     return (
       <Container>
         <ServerCardList updateList={this.state.update}/>
-        <AddServerForm onAdd={this.handleAdd} />
       </Container>
     );
   }
 
-  //dumb way to make it refresh the list!
-  handleAdd: () => void = () => {
-    this.setState({
-      update: true
-    }, () => {
-      setTimeout(()=>{
-        this.setState({
-          update: false
-        })
-      }, 1000);
-    })
-  }
+
 }
 
 export default App;

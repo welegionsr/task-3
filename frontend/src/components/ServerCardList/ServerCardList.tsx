@@ -3,6 +3,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { IServer } from "../../common/interfaces";
 import ServerCard from "../ServerCard/ServerCard";
+import AddServerForm from "../AddServerForm/AddServerForm";
 
 export interface IServerCardListProps {
   updateList?: boolean;
@@ -79,7 +80,8 @@ export class ServerCardList extends React.Component<
               );
             })
           : "Loading..."}
-          {this.state.showDeletedMessage ? <p>Server deleted from DB</p> : ""}
+        {this.state.showDeletedMessage ? <p>Server deleted from DB</p> : ""}
+        <AddServerForm onAdd={this.handleAdd} />
       </Row>
     );
   }
@@ -105,10 +107,16 @@ export class ServerCardList extends React.Component<
   handleDelete: (id: any) => void = async (id: any) => {
     await fetch(`${this._fetchURL}/${id}`, { method: "DELETE" })
       .then(res => res.json())
-      .then(result => this.setState({ 
+      .then(result =>
+        this.setState({
           showDeletedMessage: true
-       }));
+        })
+      );
   };
+
+  handleAdd: () => void = () => {
+      this.getServers();
+  }
 }
 
 export default ServerCardList;

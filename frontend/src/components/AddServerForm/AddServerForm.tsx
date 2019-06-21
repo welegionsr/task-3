@@ -107,7 +107,9 @@ export class AddServerForm extends React.Component<
       body: JSON.stringify(data)
     })
       .then(res => res.json())
-      .then(result => this.setState({ responseData: result }));
+      .then(result => this.setState({ responseData: result }, () => {
+          this.props.onAdd();
+      }));
     console.log(this.state.responseData);
   };
 
