@@ -1,8 +1,14 @@
 export interface IServer {
-    id: number;
+    id?: number;
     alias: string;
     ip_address: string;
-    hostingId: number;
+    hostingId?: number;
+    provider_name: string;
     server_status: boolean;
     time_created: number;
+}
+
+export interface IProvider {
+    provider_name: string;
+    id?: number;
 }
